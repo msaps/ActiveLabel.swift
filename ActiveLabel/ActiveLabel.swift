@@ -476,6 +476,14 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         super.touchesEnded(touches, with: event)
     }
 
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
+        if element(at: point) == nil {
+            return nil
+        }
+        return hitView
+    }
+    
     //MARK: - ActiveLabel handler
     fileprivate func didTapMention(_ username: String) {
         guard let mentionHandler = mentionTapHandler else {
